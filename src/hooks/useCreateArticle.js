@@ -3,11 +3,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const ApiUrl= import.meta.env.VITE_Server_URL || 'http://localhost:3001';
 const creteArticle = async (values) => {
     console.log("creteArticle", { values });
-
     const { data } = await axios.post(
-        `https://blogwebbackend-oz15.onrender.com/api/articles`,
+        `${ApiUrl}/api/articles`,
         { article: {...values.values} }
       );
 

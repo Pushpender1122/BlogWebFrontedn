@@ -10,9 +10,9 @@ const [article, setArticle] = useState([]);
 const { slug } = useParams()
 
 console.log('article',article)
-
+const ApiUrl= import.meta.env.VITE_Server_URL || 'http://localhost:3001';
 const getArticleBySlug = async (slug) => {
-    const {data} = await axios.get(`https://blogwebbackend-oz15.onrender.com/api/articles/${slug}`);
+    const {data} = await axios.get(`${ApiUrl}/api/articles/${slug}`);
   
     console.log("getArticleBySlug", { data });
   

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useAuth } from "../hooks";
 
 function Auth() {
+  const ApiUrl= import.meta.env.VITE_Server_URL || 'http://localhost:3001';
   const isRegister = useMatch("/register");
   // console.log(isRegister)
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function Auth() {
       // api request to login or register
 
       const { data } = await axios.post(
-        `https://blogwebbackend-oz15.onrender.com/api/users${isRegister ? "" : "/login"}`,
+        `${ApiUrl}/api/users${isRegister ? "" : "/login"}`,
         { user: values }
       );
 
@@ -28,7 +29,13 @@ function Auth() {
       console.error("Error while onSubmit: ", error);
 
       const {status, data} = error.response;
-
+      console.log(data);
+      if(status ===403){ 
+        alert(data.errors.body)
+      }
+      if(status === 401 || status === 404){
+        alert(data.message)
+      }
       if(status === 422){
         actions.setErrors(data.errors);
       }

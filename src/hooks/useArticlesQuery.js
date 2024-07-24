@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from 'axios';
-
+const ApiUrl= import.meta.env.VITE_Server_URL || 'http://localhost:3001';
 const getAllArticles = async () => {
-  const {data} = await axios.get(`https://blogwebbackend-oz15.onrender.com/api/articles/feed`);
+  const {data} = await axios.get(`${ApiUrl}/api/articles/feed`);
 
   console.log("getCurrentUser", { data });
 

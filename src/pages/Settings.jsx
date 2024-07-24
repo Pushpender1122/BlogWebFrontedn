@@ -4,9 +4,9 @@ import { useAuth, useUserQuery } from "../hooks";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-
 function Settings() {
-
+    const ApiUrl= import.meta.env.VITE_Server_URL || 'http://localhost:3001';
+    console.log('ApiUrl',ApiUrl)
     const {logout} = useAuth();
     const {
         isCurrentUserLoading,
@@ -25,7 +25,7 @@ function Settings() {
 
     async function onSubmit(values, {setErrors}){
         try {
-            const {data} = await axios.put(`https://blogwebbackend-oz15.onrender.com/api/user`, {user:values});
+            const {data} = await axios.put(`${ApiUrl}/api/user`, {user:values});
 
             const updatedUsername = data?.user?.username;
 
